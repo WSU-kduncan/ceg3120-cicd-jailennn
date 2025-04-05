@@ -7,17 +7,15 @@ This project involves containerizing an Angular application named `angular-bird`
 ### What:
 I am containerizing an Angular application so that it can be deployed in any environment using Docker.
 
--
 ### Why:
-- **Consistency:** Docker ensures the app runs the same way in all environments.
-- **Portability:** Docker containers can be easily transferred between different systems.
-- **Efficiency:** Docker simplifies dependencies and environment setup.
+- Docker ensures the app runs the same way in all environments.
+- Docker containers can be easily pulled, pushed, and transferred between different systems.
+- Docker has a very simple way of setting up dependencies and environments.
 
 ### Tools:
 - **Docker:** Used for creating and managing containers.
-- **Angular CLI:** Framework to build and serve the Angular application.
-- **Node.js:** JavaScript runtime used for building the Angular application.
 - **Docker Hub:** To store and share Docker images.
+- **Angular CLI:** Framework to build and serve the Angular application.
 
 ---
 
@@ -25,12 +23,12 @@ I am containerizing an Angular application so that it can be deployed in any env
 
 ## How to Install Docker on Ubuntu:
 
-1. Update your package list:
-   sudo apt-get update
+1. Update your package list using `sudo apt-get update`
 
-2. Install Docker and check version after
-   sudo apt-get install docker.io
-   docker --version
+2. Install Docker and check version after using:
+
+- `sudo apt-get install docker.io`
+- `docker --version`
 
 ## How to build & configure a container (without building an image) that runs the angular-site application:
 
