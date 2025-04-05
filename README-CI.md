@@ -33,3 +33,9 @@ I am containerizing an Angular application so that it can be deployed in any env
 ## How to build & configure a container (without building an image) that runs the angular-site application:
 
 Use `docker pull` to pull the angular image from the docker hub website. After this, you can use `docker run` to run the image that was just pulled. Make sure to bind the port for the container to the same port on your device.
+
+Inside the `Dockerfile`, I will configure the settings required to build an image from that file and run the angular bird package.
+
+1. The `FROM` portion of the docker file sets the base image for the rest of the instructions. The FROM must be at the beginnning of the dockerfile, using any valid image
+2. 
+3. 
