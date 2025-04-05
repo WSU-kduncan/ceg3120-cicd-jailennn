@@ -36,6 +36,40 @@ Use `docker pull` to pull the angular image from the docker hub website. After t
 
 Inside the `Dockerfile`, I will configure the settings required to build an image from that file and run the angular bird package.
 
-1. The `FROM` portion of the docker file sets the base image for the rest of the instructions. The FROM must be at the beginnning of the dockerfile, using any valid image
-2. 
-3. 
+## Dockerfile Contents
+1. The `FROM` portion of the docker file sets the base image for the rest of the instructions. The FROM must be at the beginnning of the dockerfile, using any valid image. I used the `node:18-bullseye` image similar to the example.
+2. The `WORKDIR` section of this dockerfile sets where any `RUN` or `CMD` commands will be executed. This director wi;l be created inside the container instance if it does not already exist. I used a directory named `app` to hold my files.
+3. The `COPY` section copies any files or directories from the current source to the destination which will be inside the container terminal. This will put those files in the specified destination on the COPY line. I copied both the `packagee` and the rest of the remaining files that were in the directory using the `.`  
+4. The `RUN` section of the dockerfile specifies any commands that the user would like to run inside the container. I ran the commands `npm install` and `npm install -g @angular/cli@15.0.3` to install the angular CLI
+5. The `EXPOSE` section of the dockerfile informs the docker what port the container will listen on. This is the port that will need to be connected to when testing if the setup is working. For my dockerfile, i used port `4200`
+6. The `CMD` section is also for running commands specific to the container. The `["ng", "serve", "--host", "0.0.0.0"]` commands will run the ng serve and bind to any port.
+
+> Resource: https://docs.docker.com/reference/dockerfile/#cmd
+
+## How to build an image from the repository Dockerfile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
