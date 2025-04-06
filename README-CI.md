@@ -48,8 +48,9 @@ Inside the `Dockerfile`, I will configure the settings required to build an imag
 
 ## How to build an image from the repository Dockerfile
 
+To build a docket image from a dockerfile, use the `docker build` command with the -t flag to tag the image with something. Specify your dockerhub name and where you would like to place the image, along with the directory of where the dockerfile is. If the dockerfile is in the same directory when runnuing this command, use the `.` parameter at the end. Once this is finsiehd, run `docker images` to see your newly created image.
 
-
+## How to run a container from the newly built image
 
 
 
