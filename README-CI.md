@@ -15,7 +15,7 @@ I am containerizing an Angular application so that it can be deployed in any env
 ### Tools:
 - **Docker:** Used for creating and managing containers.
 - **Docker Hub:** To store and share Docker images.
-- **Angular CLI:** serves the Angular application.
+- **Angular:** serves the Angular application.
 
 ---
 
