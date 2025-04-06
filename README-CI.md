@@ -52,6 +52,7 @@ To build a docket image from a dockerfile, use the `docker build` command with t
 
 ## How to run a container from the newly built image
 
+To run a container of the docker image you jusr created, use the `docker run command` with some extra flags. Use the `-d` flag if you would like to run this container detached or in the background. 
 
 
 
