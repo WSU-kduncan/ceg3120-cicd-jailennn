@@ -67,4 +67,5 @@ To create a public repo in dockerub, navigate to the website or to the docker de
 Before you can push an image, you must log in using your DockerHub credentials. To do this, run the `docker login` command and enter your dockerhub account information. Once you are signed in, you can use the `docker psuh` ommand to push your image to the docker hub website where it can be viewed. 
 
 > Link to my docerhub repo: https://hub.docker.com/repositories/wsujduncan
+
 > Note: when pushing, dockerhub pushed this image to its own seperate repo, rather than under the one I created :(
