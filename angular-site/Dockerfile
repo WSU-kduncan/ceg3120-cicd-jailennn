@@ -3,18 +3,15 @@ FROM node:18-bullseye
 # working directory
 WORKDIR /app
 
-# Install Angular CLI globally version 15
-RUN npm install -g @angular/cli@15.0.3
+# copy package files first
+COPY package*.json .
 
-# Copy and install dependencies
-COPY package*.json ./
+# install angular CLI with given command
+RUN npm install -g @angular/cli
 RUN npm install
 
-# Copy everything
-COPY . .
+# copy everything else from this directory to container WORKDIR
+COPY . . 
 
-# expose port
-EXPOSE 4200
-
-# Run Angular app, binding to any IP
+# CMD commands (from dev.to article)
 CMD ["ng", "serve", "--host", "0.0.0.0"]
