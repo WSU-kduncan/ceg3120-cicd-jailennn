@@ -39,18 +39,14 @@ To prove that this is working on the client side, you should see some output in 
 
 ## Dockerfile Contents
 
-> Inside the `Dockerfile`, I will configure the settings required to build an image from that file and run the angular bird package.
+Inside the `Dockerfile`, I will configure the settings required to build an image from that file and run the angular bird package.
 
-1. The `FROM` portion of the docker file sets the base image for the rest of the instructions. The FROM must be at the beginnning of the dockerfile, using any valid image. I used the `node:18-bullseye` image similar to the example.
+1. The `FROM` portion of the docker file sets the base image for the rest of the instructions. The FROM must be at the beginnning of the dockerfile, using a valid image. I used the `node:18-bullseye` image similar to the example.
 2. The `WORKDIR` section of this dockerfile sets where any `RUN` or `CMD` commands will be executed. This director wi;l be created inside the container instance if it does not already exist. I used a directory named `app` to hold my files.
 3. The `COPY` section copies any files or directories from the current source to the destination which will be inside the container terminal. This will put those files in the specified destination on the COPY line. I copied both the `packagee` and the rest of the remaining files that were in the directory using the `.`  
 4. The `RUN` section of the dockerfile specifies any commands that the user would like to run inside the container. I ran the commands `npm install` and `npm install -g @angular/cli@15.0.3` to install the angular CLI
 5. The `EXPOSE` section of the dockerfile informs the docker what port the container will listen on. This is the port that will need to be connected to when testing if the setup is working. For my dockerfile, i used port `4200`
 6. The `CMD` section is also for running commands specific to the container. The `["ng", "serve", "--host", "0.0.0.0"]` commands will run the ng serve and bind to any port.
-
-> Resources:
-> https://docs.docker.com/reference/dockerfile/
-> https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk
 
 ## How to build an image from the repository Dockerfile
 
@@ -66,13 +62,25 @@ Once the conatiner is up and running, find your local host IP adderess or use `l
 
 For the client side, the terminal should begin outputting the contents from angular and will eventually say `** Angular Live Development Server is listening on 0.0.0.0:portbind, open your browser on http://localhost:portbind/ **`. Once you see this in the terminal, you should be able to go to the browser using the above instructions to connect to the application.
 
+> Resources below were used for information on how to specifically configure the Dockerfile contents for this project, and some of the docker commands to work with that dockerfile.
+
+> https://docs.docker.com/reference/dockerfile/
+
+> https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk
+
 ---
 
 # Docker Instructions
 
-To create a public repo in dockerub, navigate to the website or to the docker desktop application and sign in. Once you do that, go to your profile and click the repositories icon. This should open up the button to `Create a repository`. Create the repository, making sure to select the public view button. 
+To create a public repo in dockerhub, navigate to the website or to the docker desktop application and sign in. Once you do that, go to your profile and click the repositories icon. This should open up the button to `Create a repository`. Create the repository, making sure to select the public view button. 
 
-Before you can push an image, you must log in using your DockerHub credentials. To do this, run the `docker login` command and enter your dockerhub account information. Once you are signed in, you can use the `docker psuh` ommand to push your image to the docker hub website where it can be viewed. 
+To create a Personal Access Token (PAT) for your Docker account, navigate to the dockerhub website and go to you account settings. There, you should see the PAT section where you can create one for your account. The PAT requires a description, expiration date, and access rules. Once this is done, use the `docker login -u yordockeruser` to login to docker form the command line.This will prompt you for either the password to that user or you can paste your PAT in place of the password. 
+
+Before you can push an image, you must log in using your DockerHub credentials. To do this, run the `docker login` command and enter your dockerhub account information. Once you are signed in, you can use the `docker psuh` command to push your image to the docker hub website where it can be viewed. 
+
+> Resources below were used for information on Dockerhub and how to setup the repository and login steps.
+
+> https://docs.docker.com/reference/cli/docker/login/
 
 > Link to my docerhub repo: https://hub.docker.com/repositories/wsujduncan
 
