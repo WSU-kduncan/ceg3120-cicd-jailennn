@@ -1,16 +1,13 @@
 # CI Project Overview
 
-This project involves containerizing an Angular application named `angular-bird` and setting it up for continuous integration (CI) using Docker. The goal is to make the Angular application easy to deploy and manage by packaging it up in a container that can run on any system.
+This project involves containerizing an application named `angular-bird` and setting it up using Docker. The goal is to make the angular bird application easy to deploy and manage by packaging it up in a container that can run on any system.
 
-## What am I doing, why, and what tools?
-
-### What:
+## What am I doing:
 I am containerizing an Angular application so that it can be deployed in any environment using Docker.
 
-### Why:
+### Why?:
 - Docker ensures the app runs the same way in all environments.
-- Docker containers can be easily pulled, pushed, and transferred between different systems.
-- Docker has a very simple way of setting up dependencies and environments.
+- Docker images can be easily pulled, pushed, and transferred between different systems.
 
 ### Tools:
 - **Docker:** Used for creating and managing containers.
@@ -19,24 +16,31 @@ I am containerizing an Angular application so that it can be deployed in any env
 
 ---
 
-# Containerizing your Application
+# Containerizing the Application
 
-## How to Install Docker on Ubuntu:
+## How to install Docker on Ubuntu:
+
+> Before doing this, you must install the WSL2 app on your windows system.
 
 1. Update your package list using `sudo apt-get update`
 
 2. Install Docker and check version after using:
 
-- `sudo apt-get install docker.io`
+- `sudo apt-get install docker`
 - `docker --version`
 
-## How to build & configure a container (without building an image) that runs the angular-site application:
+## How to build & configure a container manually (without building an image):
 
-Use `docker pull` to pull the angular image from the docker hub website. After this, you can use `docker run` to run the image that was just pulled. Make sure to bind the port for the container to the same port on your device.
+Use `docker pull angular/ngcontainer` to pull the angular image from the docker hub website. After this, you can use `docker run` command to run the image that was just pulled. Make sure to use the `-p hostport:containerport` top bind the port for the container to a port on your device.
 
-Inside the `Dockerfile`, I will configure the settings required to build an image from that file and run the angular bird package.
+When inside the angular application, you may need to use `npm install` to get additional dependencies or packages or this container. You will also need to use the `ng serve` commmand to actually start the application inside of the container.
+
+To prove that this is working on the client side, you should see some output in the container saying it is complete and successful, along with a link pouinting to where you can test if it is working on the host side. The host side link should have a URL connecting to the same port you binded earlier in the commands.
 
 ## Dockerfile Contents
+
+> Inside the `Dockerfile`, I will configure the settings required to build an image from that file and run the angular bird package.
+
 1. The `FROM` portion of the docker file sets the base image for the rest of the instructions. The FROM must be at the beginnning of the dockerfile, using any valid image. I used the `node:18-bullseye` image similar to the example.
 2. The `WORKDIR` section of this dockerfile sets where any `RUN` or `CMD` commands will be executed. This director wi;l be created inside the container instance if it does not already exist. I used a directory named `app` to hold my files.
 3. The `COPY` section copies any files or directories from the current source to the destination which will be inside the container terminal. This will put those files in the specified destination on the COPY line. I copied both the `packagee` and the rest of the remaining files that were in the directory using the `.`  
@@ -44,7 +48,9 @@ Inside the `Dockerfile`, I will configure the settings required to build an imag
 5. The `EXPOSE` section of the dockerfile informs the docker what port the container will listen on. This is the port that will need to be connected to when testing if the setup is working. For my dockerfile, i used port `4200`
 6. The `CMD` section is also for running commands specific to the container. The `["ng", "serve", "--host", "0.0.0.0"]` commands will run the ng serve and bind to any port.
 
-> Resource: https://docs.docker.com/reference/dockerfile/#cmd
+> Resources:
+> https://docs.docker.com/reference/dockerfile/
+> https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk
 
 ## How to build an image from the repository Dockerfile
 
