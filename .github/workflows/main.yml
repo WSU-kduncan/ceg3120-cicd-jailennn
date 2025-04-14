@@ -28,7 +28,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ../
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/angular-bird:latest
  # Source to help with this file: 
