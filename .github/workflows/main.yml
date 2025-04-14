@@ -28,7 +28,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ../../angular-site  # build context with all files
+          file: ../../angular-site/Dockerfile  # dockerfile path(was getting no such file error with just .)
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/angular-bird:latest
  # Source to help with this file: 
