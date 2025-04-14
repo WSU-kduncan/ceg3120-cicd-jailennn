@@ -93,7 +93,34 @@ Before you can push an image, you must log in using your DockerHub credentials. 
 1. Create a DockerHub Personal Access Token (PAT)
    - To create a Personal Access Token (PAT) for your Docker account, navigate to the dockerhub website and go to you account settings. There, you should see the PAT section where you can create one for your account. The PAT requires a description, expiration date, and access rules. The scope I elected to use for this project was read/write only. I used this because I only need will need to pull(read) or push (write). 
      > Note: This was copied from above since same question was asked.
-2. Create Github Action Secrets in Github Repo
+- Create Github Action Secrets in Github Repo
    - To create action secrets in github, navigate to you github repo and go to the repo settings. After this, navigate to `secrets and variables` section and create a new repository secret under actions. Create two secrets here, pasting your dockerhub username in one and the PAT you just generated in the other.
-3. The secrets for this porject are used by the Actions workflow to log in to DockerHub and push images without exposing the login credentials.
+- The secrets for this porject are used by the actions workflow to log in to DockerHub and push images without exposing the login information.
+
+2. CI with GitHub Actions
+
+   - The workflow file I created builds and pushes a docker image to Dockerhub whenever a commit or pull request is made to the main branch of this repository.
+   - Workflow steps:
+
+1. Run the workflow on the latest ubuntu version
+2. Use `actions/checkout@v2` command to checkout the code before doing anything
+3. Use `docker/setup-buildx-action@v2` to set up docker build, which will build the image later
+4. Use `docker/login-action@v2` and use the `with: username & password` section to enter the credentials to login with secret credentials. You want to put the `${{ secrets.yoursecretname }}` line for username and password, making sure that the username line has the secret for username and the pasword line has the secret for token.
+5. Use `docker/build-push-action@v5` to build and push the images to dockerhub. This sections requires using `with:` as well, adding the context which is where the Dockerfile will be. Also add `push: true` under the context so that the workflow will actually push to dockerhub. Lastly, include the `tags` section which will tag the image when pushed. Make sure to use the `$secretusername` when adding the tag to not include the username.
+
+If using a different repository, make sure to do the following:
+- Make sure secrets are created for the other repo
+- Have a valid dockerfile in the same place that `context` points to
+- Files needed for building the image must also be there since the dockerfile uses them
+
+> Workflow file: https://github.com/WSU-kduncan/ceg3120-cicd-jailennn/blob/main/.github/workflows/main.yml
+
+How to verify:
+
+To verify your workflow did its tasking, check for the green checkmark to appear on the screen after the workflow is done running. Also, you can go to your dockerhub account to see that the latest push of the image has been updated to the most recent time. 
+
+---
+
+
+
 
