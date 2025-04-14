@@ -74,7 +74,7 @@ For the client side, the terminal should begin outputting the contents from angu
 
 To create a public repo in dockerhub, navigate to the website or to the docker desktop application and sign in. Once you do that, go to your profile and click the repositories icon. This should open up the button to `Create a repository`. Create the repository, making sure to select the public view button. 
 
-To create a Personal Access Token (PAT) for your Docker account, navigate to the dockerhub website and go to you account settings. There, you should see the PAT section where you can create one for your account. The PAT requires a description, expiration date, and access rules. Once this is done, use the `docker login -u yordockeruser` to login to docker form the command line.This will prompt you for either the password to that user or you can paste your PAT in place of the password. 
+To create a Personal Access Token (PAT) for your Docker account, navigate to the dockerhub website and go to you account settings. There, you should see the PAT section where you can create one for your account. The PAT requires a description, expiration date, and access rules. Once this is done, use the `docker login -u yordockeruser` to login to docker form the command line. This will prompt you for either the password to that user or you can paste your PAT in place of the password. 
 
 Before you can push an image, you must log in using your DockerHub credentials. To do this, run the `docker login` command and enter your dockerhub account information. Once you are signed in, you can use the `docker psuh` command to push your image to the docker hub website where it can be viewed. 
 
@@ -85,3 +85,15 @@ Before you can push an image, you must log in using your DockerHub credentials. 
 > Link to my docerhub repo: https://hub.docker.com/repositories/wsujduncan
 
 > Note: when pushing, dockerhub pushed this image to its own seperate repo, rather than under the one I created :(
+
+---
+
+# Part 2: GitHub Actions and DockerHub
+
+1. Create a DockerHub Personal Access Token (PAT)
+   - To create a Personal Access Token (PAT) for your Docker account, navigate to the dockerhub website and go to you account settings. There, you should see the PAT section where you can create one for your account. The PAT requires a description, expiration date, and access rules. The scope I elected to use for this project was read/write only. I used this because I only need will need to pull(read) or push (write). 
+     > Note: This was copied from above since same question was asked.
+2. Create Github Action Secrets in Github Repo
+   - To create action secrets in github, navigate to you github repo and go to the repo settings. After this, navigate to `secrets and variables` section and create a new repository secret under actions. Create two secrets here, pasting your dockerhub username in one and the PAT you just generated in the other.
+3. The secrets for this porject are used by the Actions workflow to log in to DockerHub and push images without exposing the login credentials.
+
