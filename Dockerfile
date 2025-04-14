@@ -8,7 +8,6 @@ COPY package*.json .
 
 # install angular CLI with given command
 RUN npm install -g @angular/cli
-RUN npm install
 
 # copy everything else from this directory to container WORKDIR
 COPY . . 
