@@ -119,6 +119,8 @@ How to verify:
 
 To verify your workflow did its tasking, check for the green checkmark to appear on the screen after the workflow is done running. Also, you can go to your dockerhub account to see that the latest push of the image has been updated to the most recent time. 
 
+> SOURCE: See workflow file (main.yml)
+
 ---
 
 
