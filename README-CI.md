@@ -28,12 +28,13 @@ I am containerizing an Angular application so that it can be deployed in any env
 
 - `sudo apt-get install docker`
 - `docker --version`
+- `docker run hello-world` will run a test image to see if docker is working.
 
 ## How to build & configure a container manually (without building an image):
 
-Use `docker pull angular/ngcontainer` to pull the angular image from the docker hub website. After this, you can use `docker run` command to run the image that was just pulled. Make sure to use the `-p hostport:containerport` top bind the port for the container to a port on your device.
+Use `docker pull node:18-bullseye` to pull the node image from the docker hub website. After this, you can use `docker run -p 0000:0000 -it node:18-bullseye` command to run the image that was just pulled. Make sure to include the `-p hostport:containerport` to bind the port for the container to a port on your device, and the `-it` flags to run this image interactively in a terminal.
 
-When inside the angular application, you may need to use `npm install` to get additional dependencies or packages or this container. You will also need to use the `ng serve` commmand to actually start the application inside of the container.
+When inside the node application, you may need to use `npm install -g @angular/cli` to get the actual angular interface and additional dependencies or packages for this container. You will also need to use the `ng serve --host 0.0.0.0` commmand to actually start the application inside of the container.
 
 To prove that this is working on the client side, you should see some output in the container saying it is complete and successful, along with a link pouinting to where you can test if it is working on the host side. The host side link should have a URL connecting to the same port you binded earlier in the commands.
 
@@ -50,7 +51,7 @@ Inside the `Dockerfile`, I will configure the settings required to build an imag
 
 ## How to build an image from the repository Dockerfile
 
-To build a docket image from a dockerfile, use the `docker build` command with the -t flag to tag the image with something. Specify your dockerhub name and where you would like to place the image, along with the directory of where the dockerfile is. If the dockerfile is in the same directory when runnuing this command, use the `.` parameter at the end. Once this is finsiehd, run `docker images` to see your newly created image.
+To build a docker image from a dockerfile, use the `docker build` command with the -t flag to tag the image with something. Specify your dockerhub name and where you would like to place the image, along with the directory of where the dockerfile is. If the dockerfile is in the same directory when runnuing this command, use the `.` parameter at the end. Once this is finsiehd, run `docker images` to see your newly created image.
 
 ## How to run a container from the newly built image
 
@@ -62,11 +63,13 @@ Once the conatiner is up and running, find your local host IP adderess or use `l
 
 For the client side, the terminal should begin outputting the contents from angular and will eventually say `** Angular Live Development Server is listening on 0.0.0.0:portbind, open your browser on http://localhost:portbind/ **`. Once you see this in the terminal, you should be able to go to the browser using the above instructions to connect to the application.
 
-> Resources below were used for information on how to specifically configure the Dockerfile contents for this project, and some of the docker commands to work with that dockerfile.
+> Resources below were used for information on how to specifically configure the Dockerfile contents for this project, some of the docker commands to work with that dockerfile, and some of the Docker CLI commands needed for manual creation.
 
 > https://docs.docker.com/reference/dockerfile/
 
 > https://dev.to/rodrigokamada/creating-and-running-an-angular-application-in-a-docker-container-40mk
+
+> https://docs.docker.com/reference/cli/docker/
 
 ---
 
