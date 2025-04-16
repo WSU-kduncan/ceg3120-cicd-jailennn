@@ -103,7 +103,8 @@ Before you can push an image, you must log in using your DockerHub credentials. 
 2. CI with GitHub Actions
 
    - The workflow file I created builds and pushes a docker image to Dockerhub whenever a commit or pull request is made to the main branch of this repository.
-   - Workflow steps:
+   
+Workflow steps:
 
 1. Run the workflow on the latest ubuntu version
 2. Use `actions/checkout@v2` command to checkout the code before doing anything
@@ -126,6 +127,11 @@ To verify your workflow did its tasking, check for the green checkmark to appear
 
 ---
 
+3. Diagrams
 
+The goal of this project is to dockerize an image, packing all of the neccesary contents into one file `Dockerfile`. Then using github actions and secrets, set up continuous integration (CI) for the image so that any changes to the repo will automatically update and push to dockerhub where the image lies. 
+
+Tools for this project:
+1. 
 
 
