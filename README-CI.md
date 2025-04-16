@@ -79,7 +79,7 @@ To create a public repo in dockerhub, navigate to the website or to the docker d
 
 To create a Personal Access Token (PAT) for your Docker account, navigate to the dockerhub website and go to you account settings. There, you should see the PAT section where you can create one for your account. The PAT requires a description, expiration date, and access rules. Once this is done, use the `docker login -u yordockeruser` to login to docker form the command line. This will prompt you for either the password to that user or you can paste your PAT in place of the password. 
 
-Before you can push an image, you must log in using your DockerHub credentials. To do this, run the `docker login` command and enter your dockerhub account information. Once you are signed in, you can use the `docker push yourdockerhubusername/imagename:tag` command to push your image to the docker hub website where it can be viewed. 
+Before you can push an image, you must log in using your DockerHub credentials. To do this, run the `docker login -u yordockeruser` command and enter your dockerhub account information. Once you are signed in, you can use the `docker push yourdockerhubusername/imagename:tag` command to push your image to the docker hub website where it can be viewed. 
 
 > Resources below were used for information on Dockerhub and how to setup the repository and login steps.
 
@@ -132,6 +132,14 @@ To verify your workflow did its tasking, check for the green checkmark to appear
 The goal of this project is to dockerize an image, packing all of the neccesary contents into one file `Dockerfile`. Then using github actions and secrets, set up continuous integration (CI) for the image so that any changes to the repo will automatically update and push to dockerhub where the image lies. 
 
 Tools for this project:
-1. 
+
+1. Docker: Used to containerize the application, packaging all dependencies and environment settings into a single Dockerfile
+2. DockerHub: The registry where the built Docker image is pushed and stored
+3. Github: Hosts the code repo and allows CI through GitHub Actions
+4. Node & Angular: Used to build and host the application you will see
+
+Diagram:
+
+
 
 
