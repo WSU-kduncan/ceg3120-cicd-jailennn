@@ -85,7 +85,7 @@ Before you can push an image, you must log in using your DockerHub credentials. 
 
 > https://docs.docker.com/reference/cli/docker/login/
 
-> Link to my docerhub repo: https://hub.docker.com/repositories/wsujduncan
+> Link to my dockerhub repo: https://hub.docker.com/repositories/wsujduncan
 
 > Note: when pushing, dockerhub pushed this image to its own seperate repo, rather than under the one I created :(
 
@@ -127,7 +127,7 @@ To verify your workflow did its tasking, check for the green checkmark to appear
 
 ---
 
-3. Diagrams
+3. Diagram
 
 The goal of this project is to dockerize an image, packing all of the neccesary contents into one file `Dockerfile`. Then using github actions and secrets, set up continuous integration (CI) for the image so that any changes to the repo will automatically update and push to dockerhub where the image lies. 
 
@@ -140,6 +140,10 @@ Tools for this project:
 
 Diagram:
 
+> ![CI Image](images/proj4diag.PNG)
 
+> ![Working ang-bird](images/workingabird.PNG)
+
+> Note: Image above shows a working angular bird after pulling the latest image, running it, and then opening up the web browser to see the app  
 
 
