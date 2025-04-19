@@ -4,7 +4,7 @@ FROM node:18-bullseye
 WORKDIR /app
 
 # copy package files first
-COPY package*.json ./
+COPY angular-site/package*.json ./
 
 # install angular CLI with given command
 
@@ -13,7 +13,7 @@ RUN npm install --verbose
 RUN npm install -g @angular/cli
 
 # Copy the rest of the project files
-COPY . .
+COPY angular-site ./
 
 # Expose the default port 
 EXPOSE 4200
