@@ -9,6 +9,7 @@ COPY . /app
 # install angular CLI with given command
 
 RUN npm install -g @angular/cli
+RUN npm install --verbose
 
 # CMD commands (from dev.to article)
 CMD ["ng", "serve", "--host", "0.0.0.0"]
