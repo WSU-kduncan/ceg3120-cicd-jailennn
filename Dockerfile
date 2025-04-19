@@ -1,10 +1,10 @@
 FROM node:18-bullseye
 
 # working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # copy package files first
-COPY . /app
+COPY . /usr/src/app
 
 # install angular CLI with given command
 
