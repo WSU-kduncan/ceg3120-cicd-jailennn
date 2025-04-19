@@ -46,3 +46,15 @@ To verify that the image is working and can run, `docker pull dockerusername/ima
 > https://docs.github.com/en/actions/writing-workflows
 
 > See main2.yml
+
+---
+
+# COntinuous Deployement
+
+## EC2 Instance Details
+
+- I used the `Ubuntu Server 24.04` AMI for this porject
+
+
+
+---
