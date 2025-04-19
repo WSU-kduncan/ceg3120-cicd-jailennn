@@ -1,15 +1,22 @@
 FROM node:18-bullseye
 
 # working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # copy package files first
-COPY . /usr/src/app
+COPY package*.json ./
 
 # install angular CLI with given command
 
-RUN npm install -g @angular/cli
 RUN npm install --verbose
+
+RUN npm install -g @angular/cli
+
+# Copy the rest of the project files
+COPY . .
+
+# Expose the default port 
+EXPOSE 4200
 
 # CMD commands (from dev.to article)
 CMD ["ng", "serve", "--host", "0.0.0.0"]
