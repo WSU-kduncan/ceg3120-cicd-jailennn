@@ -15,8 +15,5 @@ RUN npm install -g @angular/cli
 # Copy the rest of the project files
 COPY angular-site ./
 
-# Expose the default port 
-EXPOSE 4200
-
 # CMD commands (from dev.to article)
 CMD ["ng", "serve", "--host", "0.0.0.0"]
