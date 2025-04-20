@@ -53,8 +53,46 @@ To verify that the image is working and can run, `docker pull dockerusername/ima
 
 ## EC2 Instance Details
 
-- I used the `Ubuntu Server 24.04` AMI for this porject
+- I used the `Ubuntu Server 24.04` AMI for this project, along with a `t2.medium` type instance
+- The reccomended volume size for this project is `30 GB`
+
+## Security Groups
+- The security group rules configured for this project are as follows. I made these rules to be able to accomplish all given tasks in the project:
+- All of the rules below are inbound rules coming INTO the instance. 
+- Port 22 (SSH): Opened this port to WSU addresses only so I can ssh into it while on campus.
+- Port 80 (Webhook Listener): I opened this port to anywhere so that the instance can recieve the POST resquest from the webhook configured on DockerHub. Port 443  could have also been opened here for HTTPS but I did not go there for this project.
+- Port 8080 (Connect to app in browser): I also opened this port from anywhere so that any IP can view the image/ new app running in the browser.
+
+> Source: https://docs.docker.com/docker-hub/repos/manage/webhooks/. Used to confirm that webhooks use HTTP(port 80)
+
+## Docker Setup on Ubuntu Instance
+
+- Run the following commands to install docker on the instance
+- `sudo apt update`
+- `sudo apt install -y docker.io`
+- These will update the terminal and install docker
+- `docker run hello-world`. This command will pull and run the latest endition of the hello-world image. THis is for testing it docker is working on the instance.
+
+- Additonal: Run `sudo usermod -aG docker ubuntu` to put the ubuntu user in the group that avoids having to use sudo for every docker command. You must exit and ssh back into the instance for this to take effect.
+
+## Testing docker on EC2 instance
+
+- To pull a container image from a dockerhub repo, run the command `docker pull dockerhubusername/imagename:tag`. If no tag is given, it will defailt to latest
+- Use `docker images` to see if the pulled image is now available on your instance
+- Once confirmed that the image is there, use `docker run -it -p host-port:container-port dockerhubusername/imagename` to run the image just pulled
+
+- the `-p` flag maps the port on the instance to the port in the container. Since I used 8080 in my security groups I will be using that in my command.
+- The `-d` or the `-it` flags can be used to run the container in detached mode or interactively in the terminal, respectively. -it attaches your terminal to the container which is good for debugging. -d is used to run detached and is what I would reccomen to use once testing is done.
+
+- To verify that the application is working and serving content from the container itself, run the command `docker exec -it containername  curl http://localhost:4200`. This command should return the html from the app home page.
+- From the host side(The instance), use the command `curl http://localhost:8080` to curl the html contents of the page. Note that since this instance is the one hosting the page/container, local host : the host port defined in the `docker run` command should dispaly the html.
+- To verify that the app is working from another system, open any browser and type in `http://<IntancePublicIP:8080` to see the actual webpage contents not just the html text.
 
 
+> Sources:
+
+> ChatGPT was used for verifying that the container is successfully serving the Angular application validate from container itself. I wasnt sure how to do that so I pasted that in to the AI and it gave me the `docker exec ... command`.
+
+> https://docs.docker.com/reference/cli/docker/container/run/. Used this source for information on the docker run command and which flags to use
 
 ---
