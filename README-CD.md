@@ -88,6 +88,10 @@ To verify that the image is working and can run, `docker pull dockerusername/ima
 - From the host side(The instance), use the command `curl http://localhost:8080` to curl the html contents of the page. Note that since this instance is the one hosting the page/container, local host : the host port defined in the `docker run` command should dispaly the html.
 - To verify that the app is working from another system, open any browser and type in `http://<IntancePublicIP:8080` to see the actual webpage contents not just the html text.
 
+- To manually refresh the container if there is a new version available, fisrt use `docker ps` to find the name of the container that is currently up.
+- Use `docker kill containername` to kill and stop that container from running.
+- Use `docker pull dockerhubusername/imagename:latest` to pull the latest image of the application.
+- Use the same `docker run` command from before to rerun the application with the new changes
 
 > Sources:
 
