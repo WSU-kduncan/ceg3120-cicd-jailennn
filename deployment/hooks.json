@@ -2,6 +2,18 @@
   {
     "id": "refresh-webhook",
     "execute-command": "/home/ubuntu/refresh.sh",
-    "response-message": "Redeploying container..."
+    "command-working-directory": "/home/ubuntu",
+    "response-message": "Redeploying container...",
+    "trigger-rule": {
+      "match": {
+        "type": "value",
+        "value": "mysecret123",
+        "parameter": {
+          "source": "header",
+          "name": "X-Hub-Signature"
+        }
+      }
+    }
   }
 ]
+
