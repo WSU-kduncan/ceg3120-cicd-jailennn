@@ -7,7 +7,7 @@
     "trigger-rule": {
       "match": {
         "type": "value",
-        "value": "mysecret123",
+        "value": "mysecret",
         "parameter": {
           "source": "header",
           "name": "X-Hub-Signature"
