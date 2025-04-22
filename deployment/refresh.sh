@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# did this by combining commandsfrom https://docs.docker.com/reference/cli/docker/ 
+# did this by combining commands from https://docs.docker.com/reference/cli/docker/ and adding my specific configuration.
 
 echo "-- stopping and removing existing container --"
 docker kill angular-ct
