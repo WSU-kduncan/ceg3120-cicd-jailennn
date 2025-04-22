@@ -10,6 +10,6 @@ echo "-- pulling latest image from DockerHub --"
 docker pull wsujduncan/angular-bird:latest
 
 echo "-- starting new container image --"
-docker run -it --name angular-app -p 8080:4200 wsujduncan/angular-bird:latest
+docker run -d --name angular-app -p 8080:4200 wsujduncan/angular-bird:latest
 
 echo "-- done. New container version running --"
