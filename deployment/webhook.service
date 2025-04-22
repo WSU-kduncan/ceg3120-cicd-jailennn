@@ -1,0 +1,14 @@
+[Unit]
+Description=Webhook Listener Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/webhook -hooks /home/ubuntu/hooks.json -verbose
+WorkingDirectory=/home/ubuntu
+Restart=always
+User=ubuntu
+
+[Install]
+WantedBy=multi-user.target
+# Source: https://gist.github.com/ragul28/6e5fc9ba7d1adbe761b8643b2a22a1a8. Used this source to setup this sevice file in conjuction wihth AI. 
+# The AI gave me fixes for the install section and helped remove lines I didnt need.
