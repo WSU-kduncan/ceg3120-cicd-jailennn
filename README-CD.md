@@ -17,7 +17,7 @@
 Workflow Steps:
 
 1. Only triiger ON tag pushes with the format of v.*.*.*
-2. Run on the ubuntu-latest runner
+2. Run on the `ubuntu-latest` runner
 3. Checkout the repository using `actions/checkout@v4`
 4. Use the `id: meta` with using `docker/metadata-action@v5` to get metadata about the image. Make sure to use the `${{ secrets.DOCKER_USERNAME }}/image-name` to collect the tags for this image
 5. Use the secrets set up for this repo to login to dockerhub
@@ -116,5 +116,10 @@ To verify that this script is working, use `chmod u+x scriptname.sh` to give you
 
 ---
 
+## Configure webhook listener on the instance
 
+- Run `sudo apt-get install webhook` to install webhook to the instance. RUn `webhoo --version` to make sure that it is installed.
+- The webhook file in this repo contains the following:
+    - nsdion
+    - 
 
