@@ -170,8 +170,10 @@ To enable and start the service you just created, run the following commands:
 - `sudo systemctl start webhook.service`. This command will start the webhook service
 - `sudo systemctl status webhook.service`. This will allow you to view the status of your servic, making sure it says running.
 
-To verify 
+To verify that the service is capturing payloads and triggering the bash script, either manually push a new image to dockerhub or push a new tag to github to trigger the workflow. Either way, you should see the webhook service recieve the POST from dockerhub which then starts the script. Running the command `journalctl -u webhook.service -f` will show live logs of the service.
 
 
 > Sources: AI(ChatGPT) was used in conjunction with to get the given [linux handbook](https://linuxhandbook.com/create-systemd-services/) source to get accurate descriptions of each line for my service file contents. The main source I used id not have any comments in its implementation (see webhooks.service file)
+
+---
 
