@@ -100,3 +100,21 @@ To verify that the image is working and can run, `docker pull dockerusername/ima
 > https://docs.docker.com/reference/cli/docker/container/run/. Used this source for information on the docker run command and which flags to use
 
 ---
+
+## Scripting container app refresh
+
+To script the container app to update, use `vim scriptname.sh` to create a new script file. Enter the following lines into the script:
+
+1. `docker kill currentrunningname`. This will stop the current running container. 
+2. `docker rm currentrunningname`. This will remove that container from the list so it can be readded later.
+3. `docker pull dockerusername/imagename:latest`. This will pull the latest image from dockerhub.
+4. `docker run -it --name containername -p hostport:containerport dockerusername/imagename:latest`. This will run the image just pulled from dockerhub interactively in the terminal.
+
+To verify that this script is working, use `chmod u+x scriptname.sh` to give yourself execute permissions on the script. Once this is done use `./scriptname.sh` to runn the script. After the script is ran, check the terminal output for success and also the browser the same way as earlier with `http://yourinstanceip:8080`.
+
+> Link to bash script: https://github.com/WSU-kduncan/ceg3120-cicd-jailennn/blob/main/deployment/refresh.sh
+
+---
+
+
+
