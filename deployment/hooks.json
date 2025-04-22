@@ -1,6 +1,17 @@
 [
   {
-    "id": "redeploy-webhook",
+    "id": "refresh-webhook",
     "execute-command": "/home/ubuntu/refresh.sh",
+    "response-message": "Redeploying container...",
+    "trigger-rule": {
+      "match": {
+        "type": "value",
+        "value": "mysecret",
+        "parameter": {
+          "source": "header",
+          "name": "X-Hub-Signature"
+        }
+      }
+    }
   }
 ]
