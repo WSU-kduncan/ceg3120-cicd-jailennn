@@ -1,0 +1,7 @@
+[
+  {
+    "id": "refresh-webhook",
+    "execute-command": "/home/ubuntu/refresh.sh",
+    "response-message": "Redeploying container..."
+  }
+]
