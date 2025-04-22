@@ -143,3 +143,35 @@ To verify that the json is working with webhook, run the command `webhook -hooks
 For my payload sender, I decided to use dockerhub. My reasoning behind selecting dockerhub as a payload sender is that I wanted the payload to send AFTER the new image came in so that the script can pull and run that new image. The dockerhub description of its webhooks directly says "`When an image is pushed to this repo, your workflows will kick off based on your specified webhooks.`"
 
 To enable dockerhub to send payloads to the instance, navigate to the repository webhooks section on dockerhub and create a new webhook. This will ask you to give the webhook a name and a destination URL for the POST requests to go. As i said before, the event that triggers the payload sends for this project is when new images appear in the repository(from the github workflow).
+
+To verify that a payload has successfully been delivered through dockerhub, either trigger the github workflow by creating a tag or manually push a new image to dockerhub. This will trigger the webhook on that repository and you should see the same output in the webhook the webhook terminal as you did when you generated the post request manually.
+
+Sources: 
+
+> https://docs.docker.com/docker-hub/repos/manage/webhooks/. Used this source formore information on exactly how payload sending/webhooks worked
+
+---
+
+## Listening Service
+
+My service file has the following contents
+
+1. `Description`: The description that will be given to the service. This will be listed on the status page of the service.
+2. `After=network.target`: Specifies that the webhook service should start only after the network is up and running.
+3. `ExecStart=/usr/bin/webhook -hooks /home/ubuntu/hooksname.json -verbose`: Defines the command to run when starting the service.
+4.  `WorkingDirectory=/home/ubuntu`: Specifies the directory where the service will run from. Added this to ensure that pwd was ubuntu before continuing
+5.  `Restart=always`: Instructs the system to always restart the service. This makes it so that the service will always restart if it is stopped.
+6. `User=ubuntu`: Specifies the user under which the service should run. The only user on the instance will be ubuntu
+7. `WantedBy=multi-user.target`: tells the system to start the webhook service when the system reaches the `multi-user.target` run level, which is typically when the system is fully booted and ready for multi-user operations. This ensures that the webhook listener starts automatically whenever the system boots up.
+
+To enable and start the service you just created, run the following commands:
+- `sudo systemctl daemon-reload`. This tells the systemd to read the service file
+- `sudo systemctl enable servicefilename.service`. This will enable the systemd service so that you can start it
+- `sudo systemctl start webhook.service`. This command will start the webhook service
+- `sudo systemctl status webhook.service`. This will allow you to view the status of your servic, making sure it says running.
+
+To verify 
+
+
+> Sources: AI(ChatGPT) was used in conjunction with to get the given [linux handbook](https://linuxhandbook.com/create-systemd-services/) source to get accurate descriptions of each line for my service file contents. The main source I used id not have any comments in its implementation (see webhooks.service file)
+
