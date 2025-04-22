@@ -108,7 +108,7 @@ To script the container app to update, use `vim scriptname.sh` to create a new s
 1. `docker kill currentrunningname`. This will stop the current running container. 
 2. `docker rm currentrunningname`. This will remove that container from the list so it can be readded later.
 3. `docker pull dockerusername/imagename:latest`. This will pull the latest image from dockerhub.
-4. `docker run -it --name containername -p hostport:containerport dockerusername/imagename:latest`. This will run the image just pulled from dockerhub interactively in the terminal.
+4. `docker run -d --name containername -p hostport:containerport dockerusername/imagename:latest`. This will run the image just pulled from dockerhub in a detached manner.
 
 To verify that this script is working, use `chmod u+x scriptname.sh` to give yourself execute permissions on the script. Once this is done use `./scriptname.sh` to runn the script. After the script is ran, check the terminal output for success and also the browser the same way as earlier with `http://yourinstanceip:8080`.
 
@@ -119,7 +119,27 @@ To verify that this script is working, use `chmod u+x scriptname.sh` to give you
 ## Configure webhook listener on the instance
 
 - Run `sudo apt-get install webhook` to install webhook to the instance. RUn `webhoo --version` to make sure that it is installed.
-- The webhook file in this repo contains the following:
-    - nsdion
-    - 
+- The webhook file in this repo is written in `.json` and contains the following:
+    - `id` section is the name of the webhook that will be used in the payload sender to note where the webhook is going to. This can be any name and this will be loaded later when testing.
+    - `execute-command` section specifies the path to the refresh script that will be ran when the payload comes in.
+    - `response-message` section is an optional terminal output for ensuring that the script does run when the payload comes in.
 
+To verify that the json is working with webhook, run the command `webhook -hooks hooksfile.json -verbose` and see if the webhook that you created loads. To verify that the webhook is recieving payloads that trigger it, use the command `curl -X POST http://instanceprivateip:9000/hooks/webhookid` from inside the terminal to simulate a POST request being sent to the instance. In the terminal that the webhook is running in, you should see the output saying the hook triggered and contents from the script should start to print out. The `docker ps` command should show a new image up for only a few seconds.
+
+> Sources:
+
+> https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks
+
+> https://github.com/adnanh/webhook
+
+> ChatGPT was used for help with the response message to test working webhook and the curl -X command for simulating payloads.
+
+> Link to definition json: https://github.com/WSU-kduncan/ceg3120-cicd-jailennn/blob/main/deployment/hooks.json 
+
+---
+
+## Payload sender
+
+For my payload sender, I decided to use dockerhub. My reasoning behind selecting dockerhub as a payload sender is that I wanted the payload to send AFTER the new image came in so that the script can pull and run that new image. The dockerhub description of its webhooks directly says "`When an image is pushed to this repo, your workflows will kick off based on your specified webhooks.`"
+
+To enable dockerhub to send payloads to the instance, navigate to the repository webhooks section on dockerhub and create a new webhook. This will ask you to give the webhook a name and a destination URL for the POST requests to go. As i said before, the event that triggers the payload sends for this project is when new images appear in the repository(from the github workflow).
