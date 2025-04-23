@@ -1,5 +1,25 @@
 # CD Project
 
+## Overview 
+
+The overall goal of this CD project is to present a fully functioning continuous deployment (CD) prohect using DockerHub webhooks and Github actions. Whenever a new image is pushed to DockerHub, a webhook triggers a listener service on an AWS instance that kills the current container, then pulls and deploys the updated container automatically.
+
+Tools used:
+1. GitHub repo: Stores the app code inside `angular-site` folder and workflow file to build & tag Docker images when tags are pushed here.
+2. GitHub Action: Builds and pushes Docker images to DockerHub when a tag is created
+3. DockerHub: Holds docker images and sends the webhook payloads when new images are pushed to the repo
+4. AWS Instance: Ubuntu instance that runs the latest container and runs the webhook listener
+5. Adnanhs Webhook: Listens for POST payloads from dockerhub and triggers the bash script when it gets it.
+6. System service: file configured so that the webhook service can be started automatically once the instance is started.
+
+Visual Diagram:
+
+![CD Diagram](images/CDiag.PNG)
+
+The only thing I believe that is not working is the proving/authenticating that the payload is coming from Github or Docerhub. I have the payload setup in dockerhub but I could not figure out how to put in the webhook listener file to check this. AI was used for help and it gave a `trigger-rule` section but when I added this the webhook would not load for some reason so I opted to lose the points there in hopes that the rest would work smoothly.
+
+---
+
 ## Semantic Versioning:
 
 - To see git `tags` in your github repo, navigate to the branches dropdown on the repo home page.
@@ -51,7 +71,7 @@ To verify that the image is working and can run, `docker pull dockerusername/ima
 
 # COntinuous Deployement
 
-## EC2 Instance Details
+## Instance Details
 
 - I used the `Ubuntu Server 24.04` AMI for this project, along with a `t2.medium` type instance
 - The reccomended volume size for this project is `30 GB`
@@ -75,7 +95,7 @@ To verify that the image is working and can run, `docker pull dockerusername/ima
 
 - Additonal: Run `sudo usermod -aG docker ubuntu` to put the ubuntu user in the group that avoids having to use sudo for every docker command. You must exit and ssh back into the instance for this to take effect.
 
-## Testing docker on EC2 instance
+## Testing docker on AWS instance
 
 - To pull a container image from a dockerhub repo, run the command `docker pull dockerhubusername/imagename:tag`. If no tag is given, it will defailt to latest
 - Use `docker images` to see if the pulled image is now available on your instance
@@ -175,7 +195,6 @@ To verify that the service is capturing payloads and triggering the bash script,
 
 > Sources: AI(ChatGPT) was used in conjunction with to get the given [linux handbook](https://linuxhandbook.com/create-systemd-services/) source to get accurate descriptions of each line for my service file contents. The main source I used id not have any comments in its implementation (see webhooks.service file)
 
+> Link to service file: https://github.com/WSU-kduncan/ceg3120-cicd-jailennn/blob/main/deployment/webhook.service 
+
 ---
-
-# Diagrams and Descriptioon
-
